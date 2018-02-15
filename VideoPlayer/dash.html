@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	    <title>VideoPlayer</title>
+
+	    <!-- CSS -->
+	    <link href="" rel="stylesheet">
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+		<!-- CSS Video.js -->
+		<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+
+		<!-- Video.js - DASH all-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.6/dash.all.min.js"></script>		
+		<script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
+	</head>
+
+	<body>
+
+
+ 	
+ 	
+		<!-- HLS PLAYER -->
+ 		<video id="example-video" width=600 height=300 class="video-js vjs-default-skin" controls></video>
+
+		<script>
+
+			var player = videojs('example-video');
+
+			player.ready(function() {
+			  player.src({
+			    src: 'http://www-itec.uni-klu.ac.at/ftp/datasets/DASHDataset2014/OfForestAndMen/15sec/OfForestAndMen_15s_onDemand_2014_05_09.mpd',
+			    type: 'application/dash+xml'
+			  });
+
+			  player.play();
+			});
+
+		</script>
+
+	<!-- этот скрипт должен быть именно тут, иначе плеер не работает -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.js"></script>
+
+		
+	</body>
+</html>

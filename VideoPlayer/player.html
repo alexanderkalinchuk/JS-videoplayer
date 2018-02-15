@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- далее необходимо реализовать отработку кнопки. у нас две библиотеки для плеера.
+	Либо по формату ссылку, либо плеер объединить в один.  Попробовать поменять стили плеера -->
+	<head>
+
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	    <title>VideoPlayer</title>
+
+	    <!-- CSS -->
+	    <link href="style.css" rel="stylesheet">
+
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+		<!-- CSS Video.js -->
+		<link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+
+		<!-- Video.js -->		
+		<script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
+
+		<!-- Video.js - HLS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.12.2/videojs-contrib-hls.js"></script>
+
+		<!-- Video.js - DASH all-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.6/dash.all.min.js"></script>
+
+
+	</head>
+
+	<body>
+
+		<!-- HLS PLAYER -->
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7 videoplayer m-auto">
+ 					<video id="example-video" width=600 height=300 class="video-js vjs-default-skin" controls></video>
+ 				</div>
+ 			</div>
+ 		</div>
+ 		<div class="container">
+	 		<div class="input-group justify-content-center">
+	 			<input class="col-lg-4" type="text" name="form-control" placeholder="Video URL" aria-label="Video URL" aria-describedby="basic-addon2">
+	 			<div class="input-group-append">
+	 				<button class="btn btn-outline-secondary" type="button">Load</button>
+	 			</div>
+	 		</div>		
+	 	</div>
+
+		<script>
+
+			var player = videojs('example-video');
+
+			player.ready(function() {
+			  player.src({
+			    src: 'http://www-itec.uni-klu.ac.at/ftp/datasets/DASHDataset2014/OfForestAndMen/15sec/OfForestAndMen_15s_onDemand_2014_05_09.mpd',
+			    type: 'application/dash+xml'
+			  });
+
+			  player.play();
+			});
+
+		</script>
+
+	<!-- этот скрипт должен быть именно тут, иначе плеер не работает -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.js"></script>
+
+		
+	</body>
+</html>
