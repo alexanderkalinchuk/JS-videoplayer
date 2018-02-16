@@ -16,6 +16,13 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
+		<!-- bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+		<!-- Popper -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+		<!-- CSS bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 		<!-- CSS Video.js -->
@@ -39,37 +46,99 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 videoplayer m-auto">
- 					<video id="example-video" width=600 height=300 class="video-js vjs-default-skin" controls></video>
+ 					<video id="video" width=600 height=300 class="video-js vjs-default-skin" controls></video>
  				</div>
  			</div>
  		</div>
  		<div class="container">
 	 		<div class="input-group justify-content-center">
-	 			<input class="col-lg-4" type="text" name="form-control" placeholder="Video URL" aria-label="Video URL" aria-describedby="basic-addon2">
+	 			<input class="col-lg-4 input-url-value" type="text" name="form-control" placeholder="Video URL" aria-label="Video URL" aria-describedby="basic-addon2">
 	 			<div class="input-group-append">
-	 				<button class="btn btn-outline-secondary" type="button">Load</button>
+	 				<button class="btn btn-outline-secondary button-load" type="button">Load</button>
 	 			</div>
 	 		</div>		
 	 	</div>
 
-		<script>
+	<div class="container-fluid">
+		<!-- The modal -->
+		<div class="modal fade" id="smallShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
 
-			var player = videojs('example-video');
+					<div class="modal-header">
+						<h4 class="modal-title" id="modalLabelSmall">Sorry!</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
 
-			player.ready(function() {
-			  player.src({
-			    src: 'http://www-itec.uni-klu.ac.at/ftp/datasets/DASHDataset2014/OfForestAndMen/15sec/OfForestAndMen_15s_onDemand_2014_05_09.mpd',
-			    type: 'application/dash+xml'
-			  });
+					<div class="modal-body">This player does not yet play this video format
+					</div>
 
-			  player.play();
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+<!-- 
+	ссылки для проверки видео
+http://www-itec.uni-klu.ac.at/ftp/datasets/DASHDataset2014/OfForestAndMen/15sec/OfForestAndMen_15s_onDemand_2014_05_09.mpd
+
+http://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
+ -->
+
+
+		<script type="text/javascript">
+
+			var player = videojs('video');
+
+			$(".button-load").on("click",function(){
+
+				if( !$(".input-url-value").val() ){
+					alert("Please, enter video url");
+				}else{
+
+					var inputUrlValue = $(".input-url-value").val();
+					var type = videoFormat(inputUrlValue);
+					var typeValue;
+
+					switch(type){
+						case "mpd":
+							typeValue = 'application/dash+xml';
+							break;
+						case "m3u8":
+							typeValue = 'application/x-mpegURL';	
+							break;
+						default:
+							$('#smallShoes').modal();
+
+				}
+
+					
+
+					player.ready(function() {
+					player.src({
+					    src: inputUrlValue,
+					    type: typeValue
+					});
+
+					  player.play();
+					});
+				}
+
 			});
+
+			function videoFormat(str){
+				var formatTypeArray = str.split(".");
+				var formatVideo = formatTypeArray[formatTypeArray.length-1];
+				return formatVideo;
+			};
 
 		</script>
 
-	<!-- этот скрипт должен быть именно тут, иначе плеер не работает -->
+		<!-- этот скрипт должен быть именно тут, иначе плеер не работает -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.js"></script>
-
 		
 	</body>
 </html>
