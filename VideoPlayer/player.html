@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	<!-- далее необходимо реализовать отработку кнопки. у нас две библиотеки для плеера.
-	Либо по формату ссылку, либо плеер объединить в один.  Попробовать поменять стили плеера -->
+
 	<head>
 
 	    <meta charset="utf-8">
@@ -42,7 +41,7 @@
 
 	<body>
 
-		<!-- HLS PLAYER -->
+		<!-- PLAYER -->
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 videoplayer m-auto">
@@ -60,7 +59,8 @@
 	 	</div>
 
 	<div class="container-fluid">
-		<!-- The modal -->
+
+		<!-- Modal window (error) -->
 		<div class="modal fade" id="smallShoes" tabindex="-1" role="dialog" aria-labelledby="modalLabelSmall" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
@@ -115,8 +115,6 @@ http://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
 				}
 
-					
-
 					player.ready(function() {
 					player.src({
 					    src: inputUrlValue,
@@ -129,6 +127,7 @@ http://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
 			});
 
+			// return "mpd" or "m3u8" (all after last point)
 			function videoFormat(str){
 				var formatTypeArray = str.split(".");
 				var formatVideo = formatTypeArray[formatTypeArray.length-1];
@@ -137,7 +136,6 @@ http://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8
 
 		</script>
 
-		<!-- этот скрипт должен быть именно тут, иначе плеер не работает -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.js"></script>
 		
 	</body>
